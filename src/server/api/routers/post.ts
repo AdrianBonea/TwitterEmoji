@@ -38,7 +38,7 @@ export const postRouter = createTRPCRouter({
         post,
         author: {
           ...author,
-          username: author.username,
+          username: author.username ?? "(username not found)",
         },
       };
     });
