@@ -2,6 +2,24 @@ import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { api } from "y/utils/api";
 
+const ProfileFeed = (props: { username: string }) => {
+  const { data, isLoading } = api.posts.getPostsByUserId.useQuery({
+    userId: props.username,
+  });
+
+  if (isLoading) return <LoadingSpinner />;
+
+  if (!data || data.length === 0) return <div>No posts</div>;
+
+  return (
+    <div className="flex flex-col">
+      {data.map((fullPost) => (
+        <PostView {...fullPost} key={fullPost.post.id} />
+      ))}
+    </div>
+  );
+};
+
 const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
   const { data } = api.profile.getUserByUsername.useQuery({
     username,
@@ -26,10 +44,12 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
           />
         </div>
         <div className="h-[52px]"></div>
-        <div className="p-4 text-2xl font-bold">{`@${
+        <div className="border-b border-slate-400 p-4 text-2xl font-bold">{`@${
           data.username ?? ""
         }`}</div>
-        <div className="border-b border-slate-400 p-2"></div>
+        <div className="border-b border-slate-400 p-2">
+          <ProfileFeed username={data.id} />
+        </div>
       </PageLayout>
     </>
   );
@@ -41,6 +61,8 @@ import { prisma } from "y/server/db";
 import superjson from "superjson";
 import { PageLayout } from "y/components/layout";
 import Image from "next/image";
+import LoadingSpinner from "y/components/Loading";
+import { PostView } from "y/components/postView";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const ssg = createProxySSGHelpers({
