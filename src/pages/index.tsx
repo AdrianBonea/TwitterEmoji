@@ -4,9 +4,9 @@ import { api } from "y/utils/api";
 import Image from "next/image";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { LoadingSpinner } from "y/components/loading";
 import { PageLayout } from "y/components/layout";
 import { PostView } from "y/components/postView";
+import { LoadingSpinner } from "y/components/loading";
 
 const CreatePostWizard = () => {
   const { user } = useUser();

@@ -4,9 +4,9 @@ import { api } from "y/utils/api";
 
 import { PageLayout } from "y/components/layout";
 import Image from "next/image";
-import { LoadingSpinner } from "y/components/loading";
 import { PostView } from "y/components/postView";
 import { generateSSGHelper } from "y/server/helpers/ssgHelper";
+import { LoadingSpinner } from "y/components/loading";
 
 const ProfileFeed = (props: { username: string }) => {
   const { data, isLoading } = api.posts.getPostsByUserId.useQuery({
