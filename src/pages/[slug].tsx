@@ -47,7 +47,7 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
         <div className="border-b border-slate-400 p-4 text-2xl font-bold">{`@${
           data.username ?? ""
         }`}</div>
-        <div className="border-b border-slate-400 p-2">
+        <div className="border-b border-slate-400 p-2 ">
           <ProfileFeed username={data.id} />
         </div>
       </PageLayout>
