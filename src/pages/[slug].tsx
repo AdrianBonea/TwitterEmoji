@@ -16,9 +16,20 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageLayout>
-        <div className="flex justify-center border-b border-slate-400 p-4">
-          {data.username}
+        <div className="relative flex h-48 items-center  bg-slate-600 p-4 align-middle">
+          <Image
+            src={data.profilePicture}
+            alt={`${data.username ?? ""} profile picture`}
+            width={104}
+            height={104}
+            className="absolute bottom-0 left-0 -mb-14 ml-4 rounded-full border-4  border-black"
+          />
         </div>
+        <div className="h-[52px]"></div>
+        <div className="p-4 text-2xl font-bold">{`@${
+          data.username ?? ""
+        }`}</div>
+        <div className="border-b border-slate-400 p-2"></div>
       </PageLayout>
     </>
   );
@@ -29,6 +40,7 @@ import { appRouter } from "y/server/api/root";
 import { prisma } from "y/server/db";
 import superjson from "superjson";
 import { PageLayout } from "y/components/layout";
+import Image from "next/image";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const ssg = createProxySSGHelpers({
