@@ -1,4 +1,4 @@
-const LoadingSpinner = () => {
+export const LoadingSpinner = () => {
   return (
     <div className="flex h-full items-center justify-center">
       <div
@@ -12,5 +12,3 @@ const LoadingSpinner = () => {
     </div>
   );
 };
-
-export default LoadingSpinner;
